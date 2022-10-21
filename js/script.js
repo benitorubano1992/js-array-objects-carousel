@@ -54,16 +54,25 @@ boxItem.innerHTML=imageItem;
 thumbBox.innerHTML=thumbItem;
 
 const itemList=document.getElementsByClassName("item");
+const colList=document.getElementsByClassName("col");
 let slider=0;
-
 itemList[slider].classList.add("visible");
+colList[slider].classList.add("active");
 const upBtn=document.getElementById("up-arrow");
 const downBtn=document.getElementById("down-arrow");
 upBtn.addEventListener("click",upImageShow)
 
 downBtn.addEventListener("click",downImageShow)
 
-
+for(let i=0;i<colList.length;i++){
+    colList[i].addEventListener("click",()=>{
+        itemList[slider].classList.remove("visible");
+        colList[slider].classList.remove("active");
+        slider=i;
+        itemList[slider].classList.add("visible");
+        colList[slider].classList.add("active");
+    })
+}
 
 
 
@@ -74,6 +83,7 @@ downBtn.addEventListener("click",downImageShow)
  */
 function upImageShow(){
     itemList[slider].classList.remove("visible"); 
+    colList[slider].classList.remove("active");
     if(slider<itemList.length-1){
      slider++;
      }
@@ -82,11 +92,13 @@ function upImageShow(){
          
      }
      itemList[slider].classList.add("visible");
-}
+     colList[slider].classList.add("active");
+    }
 
 
 function downImageShow(){
     itemList[slider].classList.remove("visible");  
+    colList[slider].classList.remove("active"); 
     if(slider>0){
         slider--;
         }
@@ -95,6 +107,9 @@ function downImageShow(){
             
         }
         itemList[slider].classList.add("visible");
-
+        colList[slider].classList.add("active");
 }
 
+
+
+const intervalPhoto=setInterval(upImageShow,3000);
