@@ -22,3 +22,79 @@ const images = [
     }
 ];
 console.log(images);
+
+
+
+let imageItem="";
+let thumbItem="";
+const boxItem=document.getElementById("item-box");
+const thumbBox=document.getElementById("thumb-box");
+
+
+images.forEach((item)=>{
+    imageItem+=
+    ` <div class="item hidden">
+    <div class="item-image">
+        <img src="images/${item.image}" alt="foto of ${item.text}">
+    </div>
+    <div class="item-text">
+        <h2>${item.title}</h2>
+        <p>${item.text}</p>
+    </div>
+
+    </div>`
+    thumbItem+=
+    ` <div class="col">
+    <img src="images/${item.image}" alt="foto of ${item.text}">
+    </div>`
+
+})
+
+boxItem.innerHTML=imageItem;
+thumbBox.innerHTML=thumbItem;
+
+const itemList=document.getElementsByClassName("item");
+let slider=0;
+
+itemList[slider].classList.add("visible");
+const upBtn=document.getElementById("up-arrow");
+const downBtn=document.getElementById("down-arrow");
+upBtn.addEventListener("click",upImageShow)
+
+downBtn.addEventListener("click",downImageShow)
+
+
+
+
+
+/**
+ * funzione che se invocata fa avanzare lo slider di 1 
+ * 
+ * 
+ */
+function upImageShow(){
+    itemList[slider].classList.remove("visible"); 
+    if(slider<itemList.length-1){
+     slider++;
+     }
+     else{
+     slider=0;
+         
+     }
+     itemList[slider].classList.add("visible");
+}
+
+
+function downImageShow(){
+    itemList[slider].classList.remove("visible");  
+    if(slider>0){
+        slider--;
+        }
+        else{
+        slider=itemList.length-1;
+            
+        }
+        itemList[slider].classList.add("visible");
+
+}
+
