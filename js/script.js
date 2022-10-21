@@ -56,16 +56,22 @@ thumbBox.innerHTML=thumbItem;
 const itemList=document.getElementsByClassName("item");
 const colList=document.getElementsByClassName("col");
 let slider=0;
+let startInterval="";
+let hasStartButtonClik=false;
 itemList[slider].classList.add("visible");
 colList[slider].classList.add("active");
 const upBtn=document.getElementById("up-arrow");
 const downBtn=document.getElementById("down-arrow");
 upBtn.addEventListener("click",function(){
-    intervalPhoto();
+    if(!hasStartButtonClik){
+    startInterval=setInterval(upImageShow,3000);
+    hasStartButtonClik=true;
+    }
 })
 
 downBtn.addEventListener("click",function(){
-    clearInterval(intervalPhoto);
+    clearInterval(startInterval);
+    hasStartButtonClik=false;
 })
 
 for(let i=0;i<colList.length;i++){
@@ -116,5 +122,5 @@ function downImageShow(){
 
 
 
-const intervalPhoto=setInterval(upImageShow,3000);
+
 
