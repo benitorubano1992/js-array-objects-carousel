@@ -60,9 +60,13 @@ itemList[slider].classList.add("visible");
 colList[slider].classList.add("active");
 const upBtn=document.getElementById("up-arrow");
 const downBtn=document.getElementById("down-arrow");
-upBtn.addEventListener("click",upImageShow)
+upBtn.addEventListener("click",function(){
+    intervalPhoto();
+})
 
-downBtn.addEventListener("click",downImageShow)
+downBtn.addEventListener("click",function(){
+    clearInterval(intervalPhoto);
+})
 
 for(let i=0;i<colList.length;i++){
     colList[i].addEventListener("click",()=>{
@@ -113,3 +117,4 @@ function downImageShow(){
 
 
 const intervalPhoto=setInterval(upImageShow,3000);
+
